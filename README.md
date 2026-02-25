@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO対策: タイトルとディスクリプション -->
+    <title>シールズ・ダイバーズ有限会社 | 愛知・名古屋の潜水工事・調査専門会社</title>
+    <meta name="description" content="愛知県名古屋市を拠点に活動する潜水会社、シールズ・ダイバーズ有限会社。水中土木、港湾工事、潜水調査、水中溶接・切断など、プロの潜水士が安全かつ確実な施工をご提供いたします。">
+    <meta name="keywords" content="潜水会社, 名古屋, 愛知, 潜水作業, 水中土木, 港湾工事, 潜水調査, シールズダイバーズ">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- React & ReactDOM -->
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+    <!-- Babel (JSX変換用) -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    
+    <style>
+        /* フォント設定：信頼感のある明朝体と、見出し用のゴシック体 */
+        body {
+            font-family: "Yu Mincho", "YuMincho", "Hiragino Mincho ProN", "HGS Mincho E", "MS PMincho", serif;
+            color: #334155; /* text-slate-700 */
+        }
+        .font-sans-bold {
+            font-family: "Hiragino Sans", "Meiryo", sans-serif;
+        }
+        
+        /* クリーンなグラスモーフィズム（白ベース） */
+        .header-glass {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+        
+        .card-shadow {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+        .card-shadow:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            border-color: #bae6fd; /* sky-200 */
+        }
+        
+        /* セクションタイトルの装飾（誠実でシンプルな下線） */
+        .section-title {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 3rem;
+            padding-bottom: 1rem;
+            font-family: "Hiragino Sans", "Meiryo", sans-serif;
+            font-weight: bold;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 3px;
+            background-color: #0284c7; /* sky-600 */
+        }
+    </style>
+</head>
+<body class="bg-slate-50 antialiased overflow-x-hidden selection:bg-sky-200 selection:text-sky-900">
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        // --- SVGアイコンコンポーネント ---
+        const IconAnchor = ({ className }) => (
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><circle cx="12" cy="5" r="3"/><line x1="12" x2="12" y1="22" y2="8"/><path d="M5 12H2a10 10 0 0 0 20 0h-3"/></svg>
+        );
+        const IconMenu = ({ className }) => (
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+        );
+        const IconX = ({ className }) => (
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+        );
+        const IconShieldCheck = ({ className }) => (
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/><path d="m9 12 2 2 4-4"/></svg>
+        );
+        const IconHardHat = ({ className }) => (
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M2 18a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v2z"/><path d="M10 10V5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v5"/><path d="M4 15v-3a6 6 0 0 1 6-6h0"/><path d="M14 6h0a6 6 0 0 1 6 6v3"/></svg>
+        );
+        const IconWrench = ({ className }) => (
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+        );
+        const IconSearch = ({ className }) => (
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        );
+        const IconMail = ({ className }) => (
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+        );
+
+        // --- リソース設定 ---
+        const siteResources = {
+            heroVideo: "https://assets.mixkit.co/videos/preview/mixkit-big-waves-crashing-on-the-shore-1161-large.mp4",
+            heroPoster: "https://images.unsplash.com/photo-1497493292307-31c376b6e479?auto=format&fit=crop&q=80&w=2000",
+            about: "https://images.unsplash.com/photo-1544551763-46a8723ba3f9?auto=format&fit=crop&q=80&w=1200", // 現実的なダイバーの写真に変更
+            service1: "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&q=80&w=800",
+            service2: "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&fit=crop&q=80&w=800", // 現実的な溶接の写真に変更
+            service3: "https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?auto=format&fit=crop&q=80&w=800"
+        };
+
+        const App = () => {
+            const [isScrolled, setIsScrolled] = useState(false);
+            const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+            useEffect(() => {
+                const handleScroll = () => {
+                    setIsScrolled(window.scrollY > 10);
+                };
+                window.addEventListener('scroll', handleScroll);
+                return () => window.removeEventListener('scroll', handleScroll);
+            }, []);
+
+            const scrollToSection = (id) => {
+                const element = document.getElementById(id);
+                if (element) {
+                    // ヘッダーの高さ分を考慮してスクロール
+                    const y = element.getBoundingClientRect().top + window.pageYOffset - 80;
+                    window.scrollTo({ top: y, behavior: 'smooth' });
+                    setIsMenuOpen(false);
+                }
+            };
+
+            return (
+                <div className="relative w-full text-slate-700">
+                    
+                    {/* ヘッダー（クリーンで明るいデザイン） */}
+                    <header className={`fixed w-full z-50 transition-all duration-300 ${isScrolled ? 'header-glass py-3' : 'bg-white py-5 shadow-sm'}`}>
+                        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                            <div className="flex justify-between items-center">
+                                {/* ロゴ */}
+                                <div className="flex items-center space-x-3 cursor-pointer group" onClick={() => scrollToSection('hero')}>
+                                    <div className="p-2 rounded bg-sky-600 group-hover:bg-sky-700 transition-colors">
+                                        <IconAnchor className="w-5 h-5 text-white" />
+                                    </div>
+                                    <div className="flex flex-col justify-center">
+                                        <span className="font-rounded font-black italic text-2xl md:text-3xl tracking-wider text-slate-800" style={{ fontStyle: 'italic', lineHeight: '1' }}>
+                                            SEALS DIVERS
+                                        </span>
+                                        <span className="text-[11px] md:text-xs font-bold tracking-widest mt-1 font-sans text-slate-500">シールズ・ダイバーズ有限会社</span>
+                                    </div>
+                                </div>
+
+                                {/* PCナビゲーション */}
+                                <nav className="hidden lg:flex items-center space-x-8">
+                                    {['会社概要', '業務内容', '安全理念'].map((item, index) => {
+                                        const ids = ['about', 'service', 'philosophy'];
+                                        return (
+                                            <button
+                                                key={index}
+                                                onClick={() => scrollToSection(ids[index])}
+                                                className="text-sm font-sans-bold tracking-wide text-slate-600 hover:text-sky-600 transition-colors"
+                                            >
+                                                {item}
+                                            </button>
+                                        );
+                                    })}
+                                    <button
+                                        onClick={() => scrollToSection('contact')}
+                                        className="ml-4 px-6 py-2.5 bg-sky-600 hover:bg-sky-700 text-white text-sm font-sans-bold rounded shadow transition-all hover:shadow-md"
+                                    >
+                                        ご依頼・お見積もり
+                                    </button>
+                                </nav>
+
+                                {/* モバイルメニューボタン */}
+                                <button className="lg:hidden p-2 text-slate-600" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+                                    {isMenuOpen ? <IconX className="w-7 h-7"/> : <IconMenu className="w-7 h-7"/>}
+                                </button>
+                            </div>
+                        </div>
+
+                        {/* モバイルメニュー */}
+                        {isMenuOpen && (
+                            <div className="lg:hidden absolute top-full left-0 w-full bg-white border-t border-slate-100 shadow-xl">
+                                <div className="flex flex-col px-4 py-6 space-y-2">
+                                    {['会社概要', '業務内容', '安全理念'].map((item, index) => {
+                                        const ids = ['about', 'service', 'philosophy'];
+                                        return (
+                                            <button
+                                                key={index}
+                                                onClick={() => scrollToSection(ids[index])}
+                                                className="py-3 text-left pl-4 text-slate-700 hover:bg-slate-50 rounded font-sans-bold"
+                                            >
+                                                {item}
+                                            </button>
+                                        );
+                                    })}
+                                    <div className="pt-4">
+                                        <button
+                                            onClick={() => scrollToSection('contact')}
+                                            className="w-full py-3 bg-sky-600 text-white font-sans-bold rounded shadow-sm"
+                                        >
+                                            ご依頼・お見積もり
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+                    </header>
+
+                    {/* Hero Section (動画背景だが、明るく爽やかな印象に) */}
+                    <section id="hero" className="relative h-screen min-h-[500px] flex items-center justify-center overflow-hidden bg-slate-800">
+                        <div className="absolute inset-0 z-0">
+                            <video 
+                                autoPlay 
+                                muted 
+                                loop 
+                                playsInline 
+                                poster={siteResources.heroPoster}
+                                className="w-full h-full object-cover opacity-60"
+                            >
+                                <source src={siteResources.heroVideo} type="video/mp4" />
+                            </video>
+                            {/* 海を連想させる爽やかなブルーのオーバーレイ */}
+                            <div className="absolute inset-0 bg-sky-900/40 mix-blend-multiply"></div>
+                        </div>
+
+                        <div className="relative z-10 text-center px-4 max-w-5xl mx-auto pt-20">
+                            <h1 className="text-3xl md:text-5xl lg:text-6xl font-sans-bold text-white mb-6 leading-tight tracking-wide drop-shadow-lg" style={{ textShadow: '0 2px 10px rgba(0,0,0,0.5)' }}>
+                                安全と確かな技術で、<br />
+                                水中のインフラを支える。
+                            </h1>
+                            
+                            <div className="text-white text-base md:text-xl max-w-2xl mx-auto leading-relaxed mb-10 drop-shadow-md">
+                                <p>愛知県名古屋市を拠点に活動する潜水専門業者です。</p>
+                                <p>港湾工事、水中溶接、潜水調査など、</p>
+                                <p>あらゆる潜水作業に誠実かつ迅速に対応いたします。</p>
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* About Us (現実的で誠実な会社紹介) */}
+                    <section id="about" className="py-24 bg-white relative z-10">
+                        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                            <div className="text-center">
+                                <div className="section-title">
+                                    <h2 className="text-3xl text-slate-800 tracking-wider">会社概要・ご挨拶</h2>
+                                </div>
+                            </div>
+
+                            <div className="mt-10 max-w-4xl mx-auto">
+                                <h3 className="text-2xl font-sans-bold text-slate-800 mb-6 leading-relaxed text-center md:text-left">
+                                    見えない場所だからこそ、<br className="md:hidden" />
+                                    確実で責任ある施工をお約束します。
+                                </h3>
+                                <p className="text-slate-600 leading-loose text-base mb-6 text-justify md:text-left">
+                                    シールズ・ダイバーズ有限会社は、愛知県名古屋市に本社を置く潜水工事の専門会社です。<br/><br/>
+                                    港湾・河川での土木工事から、ダムやプラント設備内の保守点検、精密な水中溶接・切断まで、水に関わるあらゆる現場で作業を行っております。<br/>
+                                    水中という特殊で過酷な環境下において最も重要なのは「安全」と「確実性」です。私たちは徹底した安全管理体制と、長年培ってきた専門技術を駆使し、お客様からのご依頼に誠心誠意お応えいたします。
+                                </p>
+                            </div>
+
+                            {/* 会社情報テーブル（個人情報を削除し、安全な情報のみに修正） */}
+                            <div className="mt-16 bg-slate-50 border border-slate-200 rounded-lg p-6 md:p-10">
+                                <dl className="divide-y divide-slate-200 text-sm md:text-base">
+                                    <div className="grid grid-cols-1 md:grid-cols-4 py-4">
+                                        <dt className="text-slate-500 font-sans-bold md:col-span-1 mb-1 md:mb-0">会社名</dt>
+                                        <dd className="text-slate-800 md:col-span-3">シールズ・ダイバーズ有限会社</dd>
+                                    </div>
+                                    <div className="grid grid-cols-1 md:grid-cols-4 py-4">
+                                        <dt className="text-slate-500 font-sans-bold md:col-span-1 mb-1 md:mb-0">所在地</dt>
+                                        <dd className="text-slate-800 md:col-span-3">愛知県名古屋市西区</dd>
+                                    </div>
+                                    <div className="grid grid-cols-1 md:grid-cols-4 py-4">
+                                        <dt className="text-slate-500 font-sans-bold md:col-span-1 mb-1 md:mb-0">事業内容</dt>
+                                        <dd className="text-slate-800 md:col-span-3">潜水工事一式（水中土木・港湾工事、水中溶接・切断、潜水調査・保守点検など）</dd>
+                                    </div>
+                                    <div className="grid grid-cols-1 md:grid-cols-4 py-4">
+                                        <dt className="text-slate-500 font-sans-bold md:col-span-1 mb-1 md:mb-0">対応エリア</dt>
+                                        <dd className="text-slate-800 md:col-span-3">愛知県を中心とした東海エリア（その他の地域もご相談ください）</dd>
+                                    </div>
+                                </dl>
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* Service (シンプルで分かりやすい事業内容) */}
+                    <section id="service" className="py-24 bg-slate-50 relative z-10 border-y border-slate-200">
+                        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                            <div className="text-center mb-16 relative">
+                                <div className="section-title">
+                                    <h2 className="text-3xl font-bold text-slate-800 tracking-widest">事業内容</h2>
+                                </div>
+                                <p className="text-slate-600 mt-4 max-w-2xl mx-auto">
+                                    港湾・河川などの公共インフラから、民間企業の設備保守まで、<br className="hidden md:block"/>幅広い潜水作業のニーズにプロフェッショナルが対応します。
+                                </p>
+                            </div>
+
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                                {/* Service 1 */}
+                                <div className="card-shadow rounded-lg overflow-hidden flex flex-col bg-white">
+                                    <div className="h-56 overflow-hidden relative">
+                                        <img src={siteResources.service1} alt="水中土木・港湾工事" className="w-full h-full object-cover" />
+                                    </div>
+                                    <div className="p-8 flex-1 flex flex-col">
+                                        <div className="flex items-center mb-4">
+                                            <IconAnchor className="w-6 h-6 text-sky-600 mr-3" />
+                                            <h3 className="text-xl font-sans-bold text-slate-800">水中土木・港湾工事</h3>
+                                        </div>
+                                        <p className="text-slate-600 text-sm leading-relaxed flex-1">
+                                            海底・河床の基礎構築、ブロックの据付、型枠設置、水中コンクリート打設など。インフラ整備の土台となる重要な工事を、図面通りに正確に施工します。
+                                        </p>
+                                    </div>
+                                </div>
+
+                                {/* Service 2 */}
+                                <div className="card-shadow rounded-lg overflow-hidden flex flex-col bg-white">
+                                    <div className="h-56 overflow-hidden relative">
+                                        <img src={siteResources.service2} alt="水中溶接・切断・補修" className="w-full h-full object-cover" />
+                                    </div>
+                                    <div className="p-8 flex-1 flex flex-col">
+                                        <div className="flex items-center mb-4">
+                                            <IconWrench className="w-6 h-6 text-sky-600 mr-3" />
+                                            <h3 className="text-xl font-sans-bold text-slate-800">水中溶接・切断・補修</h3>
+                                        </div>
+                                        <p className="text-slate-600 text-sm leading-relaxed flex-1">
+                                            鋼管矢板や橋脚などの鋼構造物の補修、防食アノードの取替、各種切断・溶接作業。特殊な機材と熟練の技術を用い、水中でも高品質な施工を実現します。
+                                        </p>
+                                    </div>
+                                </div>
+
+                                {/* Service 3 */}
+                                <div className="card-shadow rounded-lg overflow-hidden flex flex-col bg-white">
+                                    <div className="h-56 overflow-hidden relative">
+                                        <img src={siteResources.service3} alt="潜水調査・保守点検" className="w-full h-full object-cover" />
+                                    </div>
+                                    <div className="p-8 flex-1 flex flex-col">
+                                        <div className="flex items-center mb-4">
+                                            <IconSearch className="w-6 h-6 text-sky-600 mr-3" />
+                                            <h3 className="text-xl font-sans-bold text-slate-800">潜水調査・保守点検</h3>
+                                        </div>
+                                        <p className="text-slate-600 text-sm leading-relaxed flex-1">
+                                            ダム設備、浄水場、工場内の水槽、船舶の船底などの目視点検および写真・動画撮影。異常箇所の早期発見や、工事前の現況確認を詳細に報告します。
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* Philosophy (現実的な安全理念) */}
+                    <section id="philosophy" className="py-24 bg-white relative z-10">
+                        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                            <div className="text-center mb-12">
+                                <div className="section-title">
+                                    <h2 className="text-3xl font-bold text-slate-800 tracking-widest">安全理念・方針</h2>
+                                </div>
+                            </div>
+
+                            <div className="bg-sky-50 rounded-xl p-8 md:p-12 border border-sky-100 relative overflow-hidden">
+                                <div className="absolute top-0 left-0 w-2 h-full bg-sky-600"></div>
+                                <div className="flex items-center mb-6">
+                                    <IconShieldCheck className="w-8 h-8 text-sky-600 mr-4" />
+                                    <h3 className="text-2xl font-sans-bold text-slate-800">安全第一を基本とし、無事故を徹底する</h3>
+                                </div>
+                                <div className="text-slate-700 leading-loose space-y-4">
+                                    <p>潜水作業は、常に危険と隣り合わせの特殊な業務です。だからこそ、当社では「安全はすべてに優先する最重要課題」として位置づけています。</p>
+                                    <p>作業前の綿密なミーティング、機材の厳格な日常点検、そして作業員同士のコミュニケーションを徹底し、無事故・無災害での完工をお約束します。</p>
+                                    <p>専門業者としての誇りと責任を持ち、お客様に安心してお任せいただける施工体制を常に維持・向上させてまいります。</p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* Contact (お客様向け依頼フォーム) */}
+                    <section id="contact" className="py-24 bg-slate-800 relative z-10">
+                        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+                            <div className="bg-white rounded-lg p-8 md:p-12 shadow-xl">
+                                <div className="text-center mb-10">
+                                    <h2 className="text-3xl font-sans-bold text-slate-800 mb-4">ご依頼・お見積もり</h2>
+                                    <p className="text-slate-600 text-sm md:text-base leading-relaxed">
+                                        潜水作業のご依頼、現地調査、お見積もりのご相談など承っております。<br/>
+                                        愛知県名古屋市を拠点に、東海エリアを中心に迅速に対応いたします。まずはお気軽にご連絡ください。
+                                    </p>
+                                </div>
+
+                                <form action="https://formsubmit.co/nami0525029908@yahoo.co.jp" method="POST" className="space-y-6">
+                                    <input type="hidden" name="_subject" value="【HPより】ご依頼・お見積もりのご相談" />
+                                    <input type="hidden" name="_captcha" value="false" />
+
+                                    <div>
+                                        <label className="block text-sm font-sans-bold text-slate-700 mb-2">貴社名・お名前 <span className="text-slate-400 text-xs ml-1 font-normal">任意</span></label>
+                                        <input 
+                                            type="text" 
+                                            name="name" 
+                                            className="w-full px-4 py-3 bg-slate-50 border border-slate-300 rounded focus:border-sky-500 focus:ring-1 focus:ring-sky-500 transition-colors outline-none"
+                                            placeholder="例：株式会社〇〇 / 山田 太郎"
+                                        />
+                                    </div>
+
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                        <div>
+                                            <label className="block text-sm font-sans-bold text-slate-700 mb-2">電話番号 <span className="text-red-500 text-xs ml-1">必須</span></label>
+                                            <input 
+                                                type="tel" 
+                                                name="phone" 
+                                                required 
+                                                className="w-full px-4 py-3 bg-slate-50 border border-slate-300 rounded focus:border-sky-500 focus:ring-1 focus:ring-sky-500 transition-colors outline-none"
+                                                placeholder="例：090-1234-5678"
+                                            />
+                                        </div>
+                                        <div>
+                                            <label className="block text-sm font-sans-bold text-slate-700 mb-2">メールアドレス <span className="text-red-500 text-xs ml-1">必須</span></label>
+                                            <input 
+                                                type="email" 
+                                                name="email" 
+                                                required 
+                                                className="w-full px-4 py-3 bg-slate-50 border border-slate-300 rounded focus:border-sky-500 focus:ring-1 focus:ring-sky-500 transition-colors outline-none"
+                                                placeholder="例：info@example.com"
+                                            />
+                                        </div>
+                                    </div>
+                                    
+                                    <div>
+                                        <label className="block text-sm font-sans-bold text-slate-700 mb-2">ご相談内容（現場の場所や作業内容など） <span className="text-red-500 text-xs ml-1">必須</span></label>
+                                        <textarea 
+                                            name="message" 
+                                            rows="6" 
+                                            required 
+                                            className="w-full px-4 py-3 bg-slate-50 border border-slate-300 rounded focus:border-sky-500 focus:ring-1 focus:ring-sky-500 transition-colors outline-none resize-none"
+                                            placeholder="ご依頼内容、ご希望の工期、現場の住所など、お分かりになる範囲でご記入ください。"
+                                        ></textarea>
+                                    </div>
+
+                                    <div className="pt-4 text-center">
+                                        <button 
+                                            type="submit" 
+                                            className="w-full md:w-auto px-12 py-4 bg-sky-600 hover:bg-sky-700 text-white font-sans-bold rounded shadow-md transition-colors flex items-center justify-center mx-auto"
+                                        >
+                                            <IconMail className="w-5 h-5 mr-2" /> 
+                                            入力内容を送信する
+                                        </button>
+                                        <p className="text-xs text-slate-500 mt-4">送信後、担当者よりご連絡させていただきます。</p>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* Footer */}
+                    <footer className="bg-slate-900 py-10 text-slate-400 relative z-10 border-t border-slate-800">
+                        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center">
+                            <div className="flex items-center space-x-3 mb-4 md:mb-0 text-white">
+                                <IconAnchor className="w-5 h-5" />
+                                <span className="font-rounded font-black italic text-lg tracking-widest">SEALS DIVERS</span>
+                            </div>
+                            <div className="text-sm text-center md:text-right">
+                                <p className="mb-1">愛知県名古屋市西区</p>
+                                <p>&copy; {new Date().getFullYear()} Seals Divers Co., Ltd. All Rights Reserved.</p>
+                            </div>
+                        </div>
+                    </footer>
+                </div>
+            );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
