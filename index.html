@@ -3,7 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>シールズダイバーズ有限会社 | 水中のプロフェッショナル</title>
+    
+    <!-- SEO対策: タイトルとディスクリプション -->
+    <title>シールズ・ダイバーズ有限会社 | 愛知・名古屋の潜水工事・調査専門会社</title>
+    <meta name="description" content="愛知県名古屋市を拠点に活動する潜水会社、シールズ・ダイバーズ有限会社。水中土木、港湾工事、潜水調査、水中溶接・切断など、プロの潜水士が安全かつ確実な施工をご提供いたします。">
+    <meta name="keywords" content="潜水会社, 名古屋, 愛知, 潜水作業, 水中土木, 港湾工事, 潜水調査, シールズダイバーズ">
+    
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- React & ReactDOM -->
@@ -13,89 +18,66 @@
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     
     <style>
-        /* フォント設定 */
+        /* フォント設定：信頼感のある明朝体と、見出し用のゴシック体 */
         body {
             font-family: "Yu Mincho", "YuMincho", "Hiragino Mincho ProN", "HGS Mincho E", "MS PMincho", serif;
+            color: #334155; /* text-slate-700 */
+        }
+        .font-sans-bold {
+            font-family: "Hiragino Sans", "Meiryo", sans-serif;
         }
         .font-rounded {
             font-family: "Arial Rounded MT Bold", "Varela Round", "M PLUS Rounded 1c", sans-serif;
         }
-        .font-sans {
-            font-family: ui-sans-serif, system-ui, sans-serif;
+        
+        /* クリーンなグラスモーフィズム（白ベース） */
+        .header-glass {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
         }
         
-        /* アニメーション */
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-        }
-        @keyframes spin-slow {
-            from { transform: translate(-50%, -50%) rotate(0deg); }
-            to { transform: translate(-50%, -50%) rotate(360deg); }
-        }
-        
-        /* グラスモーフィズム */
-        .glass-panel {
-            background: rgba(15, 23, 42, 0.85);
-            backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
-        }
-        .glass-card {
-            background: rgba(30, 41, 59, 0.6);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        .card-shadow {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
             transition: all 0.3s ease;
         }
-        .glass-card:hover {
+        .card-shadow:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 40px rgba(6, 182, 212, 0.2);
-            border-color: rgba(6, 182, 212, 0.5);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            border-color: #0284c7; /* sky-600 */
         }
         
-        /* 背景エフェクト */
-        .orb {
-            position: fixed;
-            border-radius: 50%;
-            filter: blur(80px);
-            z-index: 0;
-            pointer-events: none;
-            transition: transform 0.2s cubic-bezier(0.075, 0.82, 0.165, 1);
-        }
-        .text-glow {
-            text-shadow: 0 0 20px rgba(6, 182, 212, 0.6);
-        }
-        .header-text-shadow {
-            text-shadow: 0 2px 4px rgba(0,0,0,0.8);
-        }
-        
-        /* セクションタイトル装飾 */
+        /* セクションタイトルの装飾（誠実でシンプルな下線） */
         .section-title {
             position: relative;
             display: inline-block;
             margin-bottom: 3rem;
+            padding-bottom: 1rem;
+            font-family: "Hiragino Sans", "Meiryo", sans-serif;
+            font-weight: bold;
         }
         .section-title::after {
             content: '';
             position: absolute;
-            bottom: -10px;
+            bottom: 0;
             left: 50%;
             transform: translateX(-50%);
-            width: 60px;
+            width: 40px;
             height: 3px;
-            background: linear-gradient(to right, #06b6d4, #3b82f6);
-            border-radius: 2px;
+            background-color: #0284c7; /* sky-600 */
         }
     </style>
 </head>
-<body class="bg-slate-900 text-slate-100 antialiased overflow-x-hidden selection:bg-cyan-500 selection:text-white">
+<body class="bg-slate-50 antialiased overflow-x-hidden selection:bg-sky-200 selection:text-sky-900">
     <div id="root"></div>
 
     <script type="text/babel">
         const { useState, useEffect } = React;
 
-        // --- SVGアイコンコンポーネント (Lucide代替) ---
+        // --- SVGアイコンコンポーネント ---
         const IconAnchor = ({ className }) => (
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><circle cx="12" cy="5" r="3"/><line x1="12" x2="12" y1="22" y2="8"/><path d="M5 12H2a10 10 0 0 0 20 0h-3"/></svg>
         );
@@ -105,23 +87,14 @@
         const IconX = ({ className }) => (
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
         );
-        const IconShield = ({ className }) => (
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/></svg>
-        );
-        const IconActivity = ({ className }) => (
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+        const IconShieldCheck = ({ className }) => (
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/><path d="m9 12 2 2 4-4"/></svg>
         );
         const IconWrench = ({ className }) => (
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
         );
-        const IconZap = ({ className }) => (
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-        );
-        const IconShip = ({ className }) => (
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M2 21c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1 .6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/><path d="M19.38 20A11.6 11.6 0 0 0 21 14l-9-4-9 4c0 2.9.9 5.8 2.8 8"/><path d="M10 10V4a2 2 0 0 1 2-2h0a2 2 0 0 1 2 2v6"/><path d="M8.4 10a5.5 5.5 0 0 1 7.2 0"/></svg>
-        );
-        const IconArrowRight = ({ className }) => (
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        const IconSearch = ({ className }) => (
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
         );
         const IconMail = ({ className }) => (
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
@@ -131,30 +104,18 @@
         const siteResources = {
             heroVideo: "https://assets.mixkit.co/videos/preview/mixkit-big-waves-crashing-on-the-shore-1161-large.mp4",
             heroPoster: "https://images.unsplash.com/photo-1497493292307-31c376b6e479?auto=format&fit=crop&q=80&w=2000",
-            about: "https://images.unsplash.com/photo-1581093588401-fbb07366f955?auto=format&fit=crop&q=80&w=1200", 
             service1: "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&q=80&w=800",
-            service2: "https://images.unsplash.com/photo-1496692052106-d37cb66ab80c?auto=format&fit=crop&q=80&w=800",
+            service2: "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&fit=crop&q=80&w=800", 
             service3: "https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?auto=format&fit=crop&q=80&w=800"
         };
 
         const App = () => {
             const [isScrolled, setIsScrolled] = useState(false);
             const [isMenuOpen, setIsMenuOpen] = useState(false);
-            const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-
-            useEffect(() => {
-                const handleMouseMove = (e) => {
-                    const x = (e.clientX - window.innerWidth / 2) / 20;
-                    const y = (e.clientY - window.innerHeight / 2) / 20;
-                    setMousePos({ x, y });
-                };
-                window.addEventListener('mousemove', handleMouseMove);
-                return () => window.removeEventListener('mousemove', handleMouseMove);
-            }, []);
 
             useEffect(() => {
                 const handleScroll = () => {
-                    setIsScrolled(window.scrollY > 50);
+                    setIsScrolled(window.scrollY > 10);
                 };
                 window.addEventListener('scroll', handleScroll);
                 return () => window.removeEventListener('scroll', handleScroll);
@@ -163,98 +124,93 @@
             const scrollToSection = (id) => {
                 const element = document.getElementById(id);
                 if (element) {
-                    element.scrollIntoView({ behavior: 'smooth' });
+                    // ヘッダーの高さ分を考慮してスクロール
+                    const y = element.getBoundingClientRect().top + window.pageYOffset - 80;
+                    window.scrollTo({ top: y, behavior: 'smooth' });
                     setIsMenuOpen(false);
                 }
             };
 
             return (
-                <div className="relative w-full">
+                <div className="relative w-full text-slate-700">
                     
-                    {/* 背景エフェクト */}
-                    <div className="fixed inset-0 z-0 bg-slate-950 pointer-events-none overflow-hidden">
-                        <div 
-                            className="orb w-[600px] h-[600px] bg-blue-900/30 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 mix-blend-screen"
-                            style={{ transform: `translate(${mousePos.x * 2}px, ${mousePos.y * 2}px)` }}
-                        ></div>
-                        <div 
-                            className="orb w-[400px] h-[400px] bg-cyan-900/20 top-1/3 left-1/3 -translate-x-1/2 -translate-y-1/2 mix-blend-screen"
-                            style={{ transform: `translate(${mousePos.x * -3}px, ${mousePos.y * -3}px)` }}
-                        ></div>
-                    </div>
-
-                    {/* ヘッダー */}
-                    <header className={`fixed w-full z-50 transition-all duration-500 ${isScrolled ? 'py-3' : 'py-6'}`}>
-                        <div className={`mx-4 md:mx-auto max-w-7xl rounded-full transition-all duration-500 ${isScrolled ? 'glass-panel px-8 py-3 shadow-lg' : 'px-4 bg-slate-900/30 backdrop-blur-sm border border-white/5'}`}>
+                    {/* ヘッダー（クリーンで明るいデザイン） */}
+                    <header className={`fixed w-full z-50 transition-all duration-300 ${isScrolled ? 'header-glass py-3' : 'bg-white py-5 shadow-sm'}`}>
+                        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                             <div className="flex justify-between items-center">
+                                {/* ロゴ */}
                                 <div className="flex items-center space-x-3 cursor-pointer group" onClick={() => scrollToSection('hero')}>
-                                    <div className="relative p-2 rounded-full border-2 border-cyan-500 bg-cyan-900/40 transition-colors group-hover:bg-cyan-500 shadow-md">
-                                        <IconAnchor className="w-6 h-6 md:w-7 md:h-7 text-cyan-400 group-hover:text-slate-900 transition-colors" />
+                                    <div className="p-2 rounded bg-sky-600 group-hover:bg-sky-700 transition-colors">
+                                        <IconAnchor className="w-5 h-5 text-white" />
                                     </div>
                                     <div className="flex flex-col justify-center">
-                                        <span className="font-rounded font-black italic text-2xl md:text-3xl tracking-wider text-white group-hover:text-cyan-400 transition-colors header-text-shadow" style={{ fontStyle: 'italic', lineHeight: '1' }}>
+                                        <span className="font-rounded font-black italic text-2xl md:text-3xl tracking-wider text-slate-800" style={{ fontStyle: 'italic', lineHeight: '1' }}>
                                             SEALS DIVERS
                                         </span>
-                                        <span className="text-[11px] md:text-xs font-bold tracking-widest mt-1 font-sans text-slate-200 header-text-shadow">シールズ・ダイバーズ有限会社</span>
+                                        <span className="text-[11px] md:text-xs font-bold tracking-widest mt-1 font-sans text-slate-500">シールズ・ダイバーズ有限会社</span>
                                     </div>
                                 </div>
 
+                                {/* PCナビゲーション */}
                                 <nav className="hidden lg:flex items-center space-x-8">
-                                    {['私たちについて', '業務内容', '理念', '会社概要'].map((item, index) => {
-                                        const ids = ['about', 'service', 'philosophy', 'company'];
+                                    {['会社概要', '業務内容', '安全理念'].map((item, index) => {
+                                        const ids = ['about', 'service', 'philosophy'];
                                         return (
                                             <button
                                                 key={index}
                                                 onClick={() => scrollToSection(ids[index])}
-                                                className="text-sm font-bold tracking-widest relative group py-2 text-white hover:text-cyan-400 transition-colors header-text-shadow"
+                                                className="text-sm font-sans-bold tracking-wide text-slate-600 hover:text-sky-600 transition-colors"
                                             >
                                                 {item}
-                                                <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-cyan-500 transition-all duration-300 group-hover:w-full"></span>
                                             </button>
                                         );
                                     })}
                                     <button
                                         onClick={() => scrollToSection('contact')}
-                                        className="ml-4 px-8 py-3 bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-500 hover:to-cyan-500 text-white text-sm font-bold rounded-full shadow-lg shadow-cyan-900/50 transition-all transform hover:scale-105 tracking-wider border border-white/10"
+                                        className="ml-4 px-6 py-2.5 bg-sky-600 hover:bg-sky-700 text-white text-sm font-sans-bold rounded shadow transition-all hover:shadow-md"
                                     >
-                                        お問い合わせ
+                                        ご依頼・お見積もり
                                     </button>
                                 </nav>
 
-                                <button className="lg:hidden p-2 text-white drop-shadow-md" onClick={() => setIsMenuOpen(!isMenuOpen)}>
-                                    {isMenuOpen ? <IconX className="w-8 h-8"/> : <IconMenu className="w-8 h-8"/>}
+                                {/* モバイルメニューボタン */}
+                                <button className="lg:hidden p-2 text-slate-600" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+                                    {isMenuOpen ? <IconX className="w-7 h-7"/> : <IconMenu className="w-7 h-7"/>}
                                 </button>
                             </div>
                         </div>
 
+                        {/* モバイルメニュー */}
                         {isMenuOpen && (
-                            <div className="lg:hidden absolute top-28 left-4 right-4 glass-panel rounded-2xl p-6 border border-white/10 shadow-2xl">
-                                <div className="flex flex-col space-y-4">
-                                    {['私たちについて', '業務内容', '理念', '会社概要'].map((item, index) => {
-                                        const ids = ['about', 'service', 'philosophy', 'company'];
+                            <div className="lg:hidden absolute top-full left-0 w-full bg-white border-t border-slate-100 shadow-xl">
+                                <div className="flex flex-col px-4 py-6 space-y-2">
+                                    {['会社概要', '業務内容', '安全理念'].map((item, index) => {
+                                        const ids = ['about', 'service', 'philosophy'];
                                         return (
                                             <button
                                                 key={index}
                                                 onClick={() => scrollToSection(ids[index])}
-                                                className="py-3 text-center text-white border-b border-slate-600 tracking-widest hover:text-cyan-400 transition-colors font-bold"
+                                                className="py-3 text-left pl-4 text-slate-700 hover:bg-slate-50 rounded font-sans-bold"
                                             >
                                                 {item}
                                             </button>
                                         );
                                     })}
-                                    <button
-                                        onClick={() => scrollToSection('contact')}
-                                        className="mt-4 py-4 bg-cyan-600 text-white font-bold tracking-widest rounded-xl shadow-md"
-                                    >
-                                        お問い合わせ
-                                    </button>
+                                    <div className="pt-4">
+                                        <button
+                                            onClick={() => scrollToSection('contact')}
+                                            className="w-full py-3 bg-sky-600 text-white font-sans-bold rounded shadow-sm"
+                                        >
+                                            ご依頼・お見積もり
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         )}
                     </header>
 
-                    {/* Hero Section */}
-                    <section id="hero" className="relative h-screen min-h-[600px] flex items-center justify-center overflow-hidden">
+                    {/* Hero Section (動画背景だが、明るく爽やかな印象に) */}
+                    <section id="hero" className="relative h-screen min-h-[500px] flex items-center justify-center overflow-hidden bg-slate-800">
                         <div className="absolute inset-0 z-0">
                             <video 
                                 autoPlay 
@@ -262,272 +218,230 @@
                                 loop 
                                 playsInline 
                                 poster={siteResources.heroPoster}
-                                className="w-full h-full object-cover opacity-80"
+                                className="w-full h-full object-cover opacity-60"
                             >
                                 <source src={siteResources.heroVideo} type="video/mp4" />
                             </video>
-                            <div className="absolute inset-0 bg-slate-900/50 mix-blend-multiply"></div>
-                            <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-slate-900/60"></div>
-                            <div className="absolute inset-0" style={{backgroundImage: 'linear-gradient(rgba(6,182,212,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(6,182,212,0.05) 1px, transparent 1px)', backgroundSize: '4rem 4rem', maskImage: 'radial-gradient(ellipse 60% 60% at 50% 50%, #000 70%, transparent 100%)'}}></div>
+                            {/* 海を連想させる爽やかなブルーのオーバーレイ */}
+                            <div className="absolute inset-0 bg-sky-900/40 mix-blend-multiply"></div>
                         </div>
 
-                        <div className="relative z-10 text-center px-4 max-w-6xl mx-auto pt-40">
-                            <div className="inline-flex items-center gap-2 px-6 py-2 rounded-full bg-cyan-950/60 border border-cyan-500/30 text-cyan-300 text-sm tracking-[0.2em] mb-8 backdrop-blur-md shadow-[0_0_20px_rgba(6,182,212,0.3)] animate-pulse">
-                                <span className="w-2 h-2 rounded-full bg-cyan-400"></span>
-                                NEXT GENERATION DIVING TECHNOLOGY
-                            </div>
-                            
-                            <h1 className="text-4xl md:text-7xl font-bold text-white mb-8 leading-tight tracking-widest text-glow drop-shadow-2xl">
-                                水中に挑み、<br />
-                                <span className="relative inline-block mt-2">
-                                    信頼を築く。
-                                    <div className="absolute -bottom-2 left-0 w-full h-2 bg-gradient-to-r from-blue-500 to-cyan-500 -skew-x-12"></div>
-                                </span>
+                        <div className="relative z-10 text-center px-4 max-w-5xl mx-auto pt-20">
+                            <h1 className="text-3xl md:text-5xl lg:text-6xl font-sans-bold text-white mb-6 leading-tight tracking-wide drop-shadow-lg" style={{ textShadow: '0 2px 10px rgba(0,0,0,0.5)' }}>
+                                安全と確かな技術で、<br />
+                                水中のインフラを支える。
                             </h1>
                             
-                            <div className="text-slate-100 text-lg md:text-2xl max-w-3xl mx-auto leading-relaxed font-medium mb-10 tracking-wide drop-shadow-md">
-                                <p className="mb-2">海・河川・港湾・ダム。</p>
-                                <p className="mb-2">あらゆる水域を制する<span className="text-cyan-400 font-bold mx-2 text-3xl">35年</span>の技術。</p>
-                                <p>見えないインフラを支える、プロフェッショナル集団。</p>
-                            </div>
-
-                            <div className="flex flex-col md:flex-row items-center justify-center gap-6 pb-12">
-                                <button onClick={() => scrollToSection('about')} className="group relative px-10 py-4 bg-white/10 hover:bg-white/20 border border-white/20 text-white font-bold rounded-full transition-all hover:scale-105 shadow-lg hover:shadow-cyan-500/30 backdrop-blur-sm">
-                                    <span className="flex items-center tracking-widest">
-                                        VIEW MORE <IconArrowRight className="ml-2 w-5 h-5 group-hover:translate-y-1 transition-transform rotate-90" />
-                                    </span>
-                                </button>
+                            <div className="text-white text-base md:text-xl max-w-2xl mx-auto leading-relaxed mb-10 drop-shadow-md">
+                                <p>愛知県名古屋市を拠点に活動する潜水専門業者です。</p>
+                                <p>港湾工事、水中溶接、潜水調査など、</p>
+                                <p>あらゆる潜水作業に誠実かつ迅速に対応いたします。</p>
                             </div>
                         </div>
                     </section>
 
-                    {/* About Us */}
-                    <section id="about" className="py-32 relative z-10 overflow-hidden">
-                        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                    {/* About Us (現実的で誠実な会社紹介) */}
+                    <section id="about" className="py-24 bg-white relative z-10">
+                        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                             <div className="text-center">
                                 <div className="section-title">
-                                    <h2 className="text-4xl font-bold text-white tracking-widest">私たちについて</h2>
-                                    <p className="text-cyan-400 text-sm tracking-[0.3em] mt-2 uppercase font-sans font-bold">About Us</p>
+                                    <h2 className="text-3xl text-slate-800 tracking-wider">会社概要・ご挨拶</h2>
                                 </div>
                             </div>
 
-                            <div className="glass-panel rounded-3xl p-8 md:p-16 relative mt-8 border-t border-l border-white/10">
-                                <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-                                    <div className="relative">
-                                        <h3 className="text-2xl md:text-3xl font-bold text-white leading-relaxed mb-8 tracking-wide">
-                                            見えない場所こそ、<br />
-                                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">美しく完璧</span>であるべきだ。
-                                        </h3>
-                                        <p className="text-slate-300 leading-loose text-lg font-medium mb-8 text-left">
-                                            シールズダイバーズは、創業35年の歴史を持つ潜水専門の技術者集団です。<br/><br/>
-                                            光の届かない深海、視界の悪い河川、複雑なプラント設備内。<br/>
-                                            私たちは最新のテクノロジーと熟練の技を融合させ、過酷な環境下でも地上と変わらぬ精度で施工・調査を完遂します。
-                                        </p>
-                                        <div className="grid grid-cols-2 gap-4 mt-8">
-                                            <div className="p-5 rounded-2xl bg-white/5 border border-white/10 hover:border-cyan-500/50 transition-colors">
-                                                <IconShield className="w-8 h-8 text-cyan-400 mb-3" />
-                                                <div className="text-xl font-bold text-white">Safety</div>
-                                                <div className="text-xs text-slate-400 font-bold">徹底した安全管理</div>
-                                            </div>
-                                            <div className="p-5 rounded-2xl bg-white/5 border border-white/10 hover:border-cyan-500/50 transition-colors">
-                                                <IconActivity className="w-8 h-8 text-cyan-400 mb-3" />
-                                                <div className="text-xl font-bold text-white">Quality</div>
-                                                <div className="text-xs text-slate-400 font-bold">妥協なき品質</div>
-                                            </div>
-                                        </div>
+                            <div className="mt-10 max-w-4xl mx-auto">
+                                <h3 className="text-2xl font-sans-bold text-slate-800 mb-6 leading-relaxed text-center md:text-left">
+                                    見えない場所だからこそ、<br className="md:hidden" />
+                                    確実で責任ある施工をお約束します。
+                                </h3>
+                                <p className="text-slate-600 leading-loose text-base mb-6 text-justify md:text-left">
+                                    シールズ・ダイバーズ有限会社は、愛知県名古屋市に本社を置く潜水工事の専門会社です。<br/><br/>
+                                    港湾・河川での土木工事から、ダムやプラント設備内の保守点検、精密な水中溶接・切断まで、水に関わるあらゆる現場で作業を行っております。<br/>
+                                    水中という特殊で過酷な環境下において最も重要なのは「安全」と「確実性」です。私たちは徹底した安全管理体制と、長年培ってきた専門技術を駆使し、お客様からのご依頼に誠心誠意お応えいたします。
+                                </p>
+                            </div>
+
+                            {/* 会社情報テーブル（個人情報を削除し、安全な情報のみに修正） */}
+                            <div className="mt-16 bg-slate-50 border border-slate-200 rounded-lg p-6 md:p-10">
+                                <dl className="divide-y divide-slate-200 text-sm md:text-base">
+                                    <div className="grid grid-cols-1 md:grid-cols-4 py-4">
+                                        <dt className="text-slate-500 font-sans-bold md:col-span-1 mb-1 md:mb-0">会社名</dt>
+                                        <dd className="text-slate-800 md:col-span-3">シールズ・ダイバーズ有限会社</dd>
                                     </div>
-                                    <div className="relative group" style={{perspective: '1000px'}}>
-                                        <div className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-white/5 bg-slate-900 transition-transform duration-700 transform group-hover:rotate-y-6 group-hover:scale-[1.02]">
-                                            <img 
-                                                src={siteResources.about} 
-                                                alt="Future Diving Technology Art" 
-                                                className="w-full h-full object-cover transition-opacity duration-700 opacity-80 group-hover:opacity-100"
-                                            />
-                                            <div className="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent"></div>
-                                            <div className="absolute bottom-6 left-6 border-l-4 border-cyan-500 pl-4">
-                                                <p className="text-xs text-cyan-400 tracking-widest uppercase mb-1 font-bold">ESTABLISHED 1989</p>
-                                                <p className="text-xl font-bold text-white tracking-widest">35年の軌跡と進化</p>
-                                            </div>
-                                        </div>
-                                        <div className="absolute -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[110%] h-[110%] border border-dashed border-cyan-500/30 rounded-full" style={{animation: 'spin-slow 60s linear infinite'}}></div>
+                                    <div className="grid grid-cols-1 md:grid-cols-4 py-4">
+                                        <dt className="text-slate-500 font-sans-bold md:col-span-1 mb-1 md:mb-0">所在地</dt>
+                                        <dd className="text-slate-800 md:col-span-3">愛知県名古屋市西区</dd>
                                     </div>
-                                </div>
+                                    <div className="grid grid-cols-1 md:grid-cols-4 py-4">
+                                        <dt className="text-slate-500 font-sans-bold md:col-span-1 mb-1 md:mb-0">事業内容</dt>
+                                        <dd className="text-slate-800 md:col-span-3">潜水工事一式（水中土木・港湾工事、水中溶接・切断、潜水調査・保守点検など）</dd>
+                                    </div>
+                                    <div className="grid grid-cols-1 md:grid-cols-4 py-4">
+                                        <dt className="text-slate-500 font-sans-bold md:col-span-1 mb-1 md:mb-0">対応エリア</dt>
+                                        <dd className="text-slate-800 md:col-span-3">愛知県を中心とした東海エリア（その他の地域もご相談ください）</dd>
+                                    </div>
+                                </dl>
                             </div>
                         </div>
                     </section>
 
-                    {/* Service */}
-                    <section id="service" className="py-32 relative z-10 bg-slate-900/50">
+                    {/* Service (シンプルで分かりやすい事業内容) */}
+                    <section id="service" className="py-24 bg-slate-50 relative z-10 border-y border-slate-200">
                         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                            <div className="text-center mb-20 relative">
+                            <div className="text-center mb-16 relative">
                                 <div className="section-title">
-                                    <h2 className="text-4xl font-bold text-white tracking-widest">業務内容</h2>
-                                    <p className="text-cyan-600 text-sm tracking-[0.3em] mt-2 uppercase font-sans font-bold">Our Services</p>
+                                    <h2 className="text-3xl font-bold text-slate-800 tracking-widest">事業内容</h2>
                                 </div>
+                                <p className="text-slate-600 mt-4 max-w-2xl mx-auto">
+                                    港湾・河川などの公共インフラから、民間企業の設備保守まで、<br className="hidden md:block"/>幅広い潜水作業のニーズにプロフェッショナルが対応します。
+                                </p>
                             </div>
 
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                                <div className="group glass-card rounded-2xl overflow-hidden hover:-translate-y-2">
-                                    <div className="h-64 overflow-hidden relative">
-                                        <div className="absolute inset-0 bg-blue-900/30 mix-blend-overlay z-10"></div>
-                                        <img src={siteResources.service1} alt="水中土木工事" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale group-hover:grayscale-0" />
+                                {/* Service 1 */}
+                                <div className="card-shadow rounded-lg overflow-hidden flex flex-col bg-white">
+                                    <div className="h-56 overflow-hidden relative">
+                                        <img src={siteResources.service1} alt="水中土木・港湾工事" className="w-full h-full object-cover" />
                                     </div>
-                                    <div className="p-8 relative bg-slate-800/80">
-                                        <div className="absolute -top-10 right-6 w-20 h-20 bg-slate-900 rounded-2xl rotate-45 flex items-center justify-center border border-white/10 shadow-xl z-20 group-hover:rotate-0 transition-transform duration-500">
-                                            <IconAnchor className="w-8 h-8 text-blue-400 -rotate-45 group-hover:rotate-0 transition-transform duration-500" />
+                                    <div className="p-8 flex-1 flex flex-col">
+                                        <div className="flex items-center mb-4">
+                                            <IconAnchor className="w-6 h-6 text-sky-600 mr-3" />
+                                            <h3 className="text-xl font-sans-bold text-slate-800">水中土木・港湾工事</h3>
                                         </div>
-                                        <h3 className="text-xl font-bold text-white mb-4 tracking-wide border-b border-slate-600 pb-2 inline-block pr-16">水中土木工事</h3>
-                                        <p className="text-slate-400 text-sm leading-relaxed mb-6 min-h-[4.5em]">インフラの根幹を支える基礎構築。構造物のワイヤーフレーム解析に基づく高精度施工。</p>
+                                        <p className="text-slate-600 text-sm leading-relaxed flex-1">
+                                            海底・河床の基礎構築、ブロックの据付、型枠設置、水中コンクリート打設など。インフラ整備の土台となる重要な工事を、図面通りに正確に施工します。
+                                        </p>
                                     </div>
                                 </div>
 
-                                <div className="group glass-card rounded-2xl overflow-hidden hover:-translate-y-2">
-                                    <div className="h-64 overflow-hidden relative">
-                                        <div className="absolute inset-0 bg-blue-900/30 mix-blend-overlay z-10"></div>
-                                        <img src={siteResources.service2} alt="構造物施工・補修" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale group-hover:grayscale-0" />
+                                {/* Service 2 */}
+                                <div className="card-shadow rounded-lg overflow-hidden flex flex-col bg-white">
+                                    <div className="h-56 overflow-hidden relative">
+                                        <img src={siteResources.service2} alt="水中溶接・切断・補修" className="w-full h-full object-cover" />
                                     </div>
-                                    <div className="p-8 relative bg-slate-800/80">
-                                        <div className="absolute -top-10 right-6 w-20 h-20 bg-slate-900 rounded-2xl rotate-45 flex items-center justify-center border border-white/10 shadow-xl z-20 group-hover:rotate-0 transition-transform duration-500">
-                                            <IconZap className="w-8 h-8 text-orange-400 -rotate-45 group-hover:rotate-0 transition-transform duration-500" />
+                                    <div className="p-8 flex-1 flex flex-col">
+                                        <div className="flex items-center mb-4">
+                                            <IconWrench className="w-6 h-6 text-sky-600 mr-3" />
+                                            <h3 className="text-xl font-sans-bold text-slate-800">水中溶接・切断・補修</h3>
                                         </div>
-                                        <h3 className="text-xl font-bold text-white mb-4 tracking-wide border-b border-slate-600 pb-2 inline-block pr-16">構造物施工・補修</h3>
-                                        <p className="text-slate-400 text-sm leading-relaxed mb-6 min-h-[4.5em]">水中溶接技術による延命化。火花散る現場での精密な補修作業。</p>
+                                        <p className="text-slate-600 text-sm leading-relaxed flex-1">
+                                            鋼管矢板や橋脚などの鋼構造物の補修、防食アノードの取替、各種切断・溶接作業。特殊な機材と熟練の技術を用い、水中でも高品質な施工を実現します。
+                                        </p>
                                     </div>
                                 </div>
 
-                                <div className="group glass-card rounded-2xl overflow-hidden hover:-translate-y-2">
-                                    <div className="h-64 overflow-hidden relative">
-                                        <div className="absolute inset-0 bg-blue-900/30 mix-blend-overlay z-10"></div>
-                                        <img src={siteResources.service3} alt="水中メンテナンス" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale group-hover:grayscale-0" />
+                                {/* Service 3 */}
+                                <div className="card-shadow rounded-lg overflow-hidden flex flex-col bg-white">
+                                    <div className="h-56 overflow-hidden relative">
+                                        <img src={siteResources.service3} alt="潜水調査・保守点検" className="w-full h-full object-cover" />
                                     </div>
-                                    <div className="p-8 relative bg-slate-800/80">
-                                        <div className="absolute -top-10 right-6 w-20 h-20 bg-slate-900 rounded-2xl rotate-45 flex items-center justify-center border border-white/10 shadow-xl z-20 group-hover:rotate-0 transition-transform duration-500">
-                                            <IconShip className="w-8 h-8 text-emerald-400 -rotate-45 group-hover:rotate-0 transition-transform duration-500" />
+                                    <div className="p-8 flex-1 flex flex-col">
+                                        <div className="flex items-center mb-4">
+                                            <IconSearch className="w-6 h-6 text-sky-600 mr-3" />
+                                            <h3 className="text-xl font-sans-bold text-slate-800">潜水調査・保守点検</h3>
                                         </div>
-                                        <h3 className="text-xl font-bold text-white mb-4 tracking-wide border-b border-slate-600 pb-2 inline-block pr-16">水中メンテナンス</h3>
-                                        <p className="text-slate-400 text-sm leading-relaxed mb-6 min-h-[4.5em]">船舶・プラント設備の徹底点検。ドック内外を問わず、クリアな視点で異常を見逃さない。</p>
+                                        <p className="text-slate-600 text-sm leading-relaxed flex-1">
+                                            ダム設備、浄水場、工場内の水槽、船舶の船底などの目視点検および写真・動画撮影。異常箇所の早期発見や、工事前の現況確認を詳細に報告します。
+                                        </p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </section>
 
-                    {/* Philosophy */}
-                    <section id="philosophy" className="py-32 relative z-10">
-                        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                            <div className="text-center mb-16">
-                                <div className="section-title">
-                                    <h2 className="text-4xl font-bold text-white tracking-widest">理念</h2>
-                                    <p className="text-cyan-600 text-sm tracking-[0.3em] mt-2 uppercase font-sans font-bold">Philosophy</p>
-                                </div>
-                            </div>
-
-                            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-                                <div className="relative p-12 bg-slate-800/50 rounded-3xl shadow-xl border border-white/5 group hover:border-cyan-500/30 transition-all overflow-hidden">
-                                    <div className="absolute top-0 left-0 w-2 h-full bg-cyan-500"></div>
-                                    <div className="absolute -right-10 -bottom-10 w-40 h-40 bg-cyan-500 rounded-full opacity-10 blur-3xl group-hover:opacity-20 transition-opacity duration-700"></div>
-                                    <h3 className="text-lg font-bold text-cyan-400 mb-6 tracking-widest flex items-center">
-                                        <IconActivity className="w-5 h-5 mr-2" /> 経営理念
-                                    </h3>
-                                    <p className="text-2xl md:text-3xl font-bold text-white mb-6 leading-relaxed tracking-wide">
-                                        学びを止めず、<br/>今を全力で生き、<br/>未来への価値を創造する。
-                                    </p>
-                                    <p className="text-slate-400 leading-relaxed">
-                                        常に一段高いレベルを追求し、技術と人間力を磨き続けることで、社会から必要とされる企業であり続けます。
-                                    </p>
-                                </div>
-
-                                <div className="relative p-12 bg-slate-800/50 rounded-3xl shadow-xl border border-white/5 group hover:border-blue-500/30 transition-all overflow-hidden">
-                                    <div className="absolute top-0 left-0 w-2 h-full bg-blue-600"></div>
-                                    <div className="absolute -right-10 -bottom-10 w-40 h-40 bg-blue-600 rounded-full opacity-10 blur-3xl group-hover:opacity-20 transition-opacity duration-700"></div>
-                                    <h3 className="text-lg font-bold text-blue-400 mb-6 tracking-widest flex items-center">
-                                        <IconShield className="w-5 h-5 mr-2" /> 安全理念
-                                    </h3>
-                                    <p className="text-2xl md:text-3xl font-bold text-white mb-6 leading-relaxed tracking-wide">
-                                        安全はすべてに優先する<br/>最重要課題である。
-                                    </p>
-                                    <p className="text-slate-400 leading-relaxed">
-                                        無事故・無災害での完工を当然の使命とし、互いを尊重し合い、明るく活気に満ちた安全で快適な職場環境の形成を目指します。
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-
-                    {/* Company */}
-                    <section id="company" className="py-32 relative z-10 bg-slate-900/80">
+                    {/* Philosophy (現実的な安全理念) */}
+                    <section id="philosophy" className="py-24 bg-white relative z-10">
                         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-                            <div className="text-center mb-16">
+                            <div className="text-center mb-12">
                                 <div className="section-title">
-                                    <h2 className="text-3xl font-bold text-white tracking-widest">会社概要</h2>
-                                    <p className="text-cyan-600 text-sm tracking-[0.3em] mt-2 uppercase font-sans font-bold">Company Profile</p>
+                                    <h2 className="text-3xl font-bold text-slate-800 tracking-widest">安全理念・方針</h2>
                                 </div>
                             </div>
 
-                            <div className="bg-slate-800/50 rounded-2xl overflow-hidden border border-white/10 shadow-inner">
-                                <div className="grid grid-cols-1 md:grid-cols-4 py-6 border-b border-white/5 hover:bg-white/5 transition-colors group px-8">
-                                    <dt className="text-slate-500 text-sm tracking-widest md:col-span-1 py-1 group-hover:text-cyan-400 transition-colors font-bold">会社名</dt>
-                                    <dd className="text-slate-200 text-base tracking-wide md:col-span-3 py-1 font-medium leading-relaxed">シールズ・ダイバーズ有限会社</dd>
+                            <div className="bg-sky-50 rounded-xl p-8 md:p-12 border border-sky-100 relative overflow-hidden">
+                                <div className="absolute top-0 left-0 w-2 h-full bg-sky-600"></div>
+                                <div className="flex items-center mb-6">
+                                    <IconShieldCheck className="w-8 h-8 text-sky-600 mr-4" />
+                                    <h3 className="text-2xl font-sans-bold text-slate-800">安全第一を基本とし、無事故を徹底する</h3>
                                 </div>
-                                <div className="grid grid-cols-1 md:grid-cols-4 py-6 border-b border-white/5 hover:bg-white/5 transition-colors group px-8">
-                                    <dt className="text-slate-500 text-sm tracking-widest md:col-span-1 py-1 group-hover:text-cyan-400 transition-colors font-bold">代表者</dt>
-                                    <dd className="text-slate-200 text-base tracking-wide md:col-span-3 py-1 font-medium leading-relaxed">代表取締役　有永 明弘<br/>取締役　有永 剛士</dd>
-                                </div>
-                                <div className="grid grid-cols-1 md:grid-cols-4 py-6 border-b border-white/5 hover:bg-white/5 transition-colors group px-8">
-                                    <dt className="text-slate-500 text-sm tracking-widest md:col-span-1 py-1 group-hover:text-cyan-400 transition-colors font-bold">所在地</dt>
-                                    <dd className="text-slate-200 text-base tracking-wide md:col-span-3 py-1 font-medium leading-relaxed">〒452-0803 愛知県名古屋市西区大野木3-93 宝庄内公園ハイツ408号</dd>
-                                </div>
-                                <div className="grid grid-cols-1 md:grid-cols-4 py-6 border-b border-white/5 hover:bg-white/5 transition-colors group px-8">
-                                    <dt className="text-slate-500 text-sm tracking-widest md:col-span-1 py-1 group-hover:text-cyan-400 transition-colors font-bold">資本金</dt>
-                                    <dd className="text-slate-200 text-base tracking-wide md:col-span-3 py-1 font-medium leading-relaxed">30,000千円</dd>
-                                </div>
-                                <div className="grid grid-cols-1 md:grid-cols-4 py-6 border-b border-white/5 hover:bg-white/5 transition-colors group px-8 last:border-0">
-                                    <dt className="text-slate-500 text-sm tracking-widest md:col-span-1 py-1 group-hover:text-cyan-400 transition-colors font-bold">建設業許可</dt>
-                                    <dd className="text-slate-200 text-base tracking-wide md:col-span-3 py-1 font-medium leading-relaxed">愛知県知事許可（一般） とび・土木コンクリート工事</dd>
+                                <div className="text-slate-700 leading-loose space-y-4">
+                                    <p>潜水作業は、常に危険と隣り合わせの特殊な業務です。だからこそ、当社では「安全はすべてに優先する最重要課題」として位置づけています。</p>
+                                    <p>作業前の綿密なミーティング、機材の厳格な日常点検、そして作業員同士のコミュニケーションを徹底し、無事故・無災害での完工をお約束します。</p>
+                                    <p>専門業者としての誇りと責任を持ち、お客様に安心してお任せいただける施工体制を常に維持・向上させてまいります。</p>
                                 </div>
                             </div>
                         </div>
                     </section>
 
-                    {/* Contact */}
-                    <section id="contact" className="py-32 relative z-10">
+                    {/* Contact (お客様向け依頼フォーム) */}
+                    <section id="contact" className="py-24 bg-slate-800 relative z-10">
                         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-                            <div className="bg-slate-800/80 backdrop-blur-xl rounded-3xl p-10 md:p-16 border border-white/10 shadow-2xl relative overflow-hidden">
-                                <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-cyan-500 via-blue-600 to-cyan-500"></div>
-                                <div className="text-center mb-12 relative z-10">
-                                    <h2 className="text-3xl font-bold text-white mb-4 tracking-widest">お問い合わせ</h2>
-                                    <p className="text-slate-400 font-medium tracking-wide">
-                                        技術と信頼で、未来を築くパートナーとして。<br/>
-                                        お問い合わせをお待ちしております。
+                            <div className="bg-white rounded-lg p-8 md:p-12 shadow-xl">
+                                <div className="text-center mb-10">
+                                    <h2 className="text-3xl font-sans-bold text-slate-800 mb-4">ご依頼・お見積もり</h2>
+                                    <p className="text-slate-600 text-sm md:text-base leading-relaxed">
+                                        潜水作業のご依頼、現地調査、お見積もりのご相談など承っております。<br/>
+                                        愛知県名古屋市を拠点に、東海エリアを中心に迅速に対応いたします。まずはお気軽にご連絡ください。
                                     </p>
                                 </div>
-                                <form action="https://formsubmit.co/nami0525029908@yahoo.co.jp" method="POST" className="space-y-8 relative z-10">
-                                    <input type="hidden" name="_subject" value="HPよりお問い合わせ" />
+
+                                <form action="https://formsubmit.co/nami0525029908@yahoo.co.jp" method="POST" className="space-y-6">
+                                    <input type="hidden" name="_subject" value="【HPより】ご依頼・お見積もりのご相談" />
                                     <input type="hidden" name="_captcha" value="false" />
-                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                                        <div className="group relative">
-                                            <input type="text" name="name" required placeholder=" " className="peer w-full px-4 py-3 bg-slate-900/50 border border-slate-600 rounded-lg text-white focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-all outline-none placeholder-transparent" />
-                                            <label className="absolute left-4 top-3 text-slate-500 text-xs tracking-widest transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-slate-500 peer-placeholder-shown:top-3.5 peer-focus:-top-2.5 peer-focus:text-cyan-400 peer-focus:bg-slate-800 peer-focus:px-2 peer-focus:text-xs">お名前</label>
+
+                                    <div>
+                                        <label className="block text-sm font-sans-bold text-slate-700 mb-2">貴社名・お名前 <span className="text-slate-400 text-xs ml-1 font-normal">任意</span></label>
+                                        <input 
+                                            type="text" 
+                                            name="name" 
+                                            className="w-full px-4 py-3 bg-slate-50 border border-slate-300 rounded focus:border-sky-500 focus:ring-1 focus:ring-sky-500 transition-colors outline-none"
+                                            placeholder="例：株式会社〇〇 / 山田 太郎"
+                                        />
+                                    </div>
+
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                        <div>
+                                            <label className="block text-sm font-sans-bold text-slate-700 mb-2">電話番号 <span className="text-red-500 text-xs ml-1">必須</span></label>
+                                            <input 
+                                                type="tel" 
+                                                name="phone" 
+                                                required 
+                                                className="w-full px-4 py-3 bg-slate-50 border border-slate-300 rounded focus:border-sky-500 focus:ring-1 focus:ring-sky-500 transition-colors outline-none"
+                                                placeholder="例：090-1234-5678"
+                                            />
                                         </div>
-                                        <div className="group relative">
-                                            <input type="tel" name="phone" required placeholder=" " className="peer w-full px-4 py-3 bg-slate-900/50 border border-slate-600 rounded-lg text-white focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-all outline-none placeholder-transparent" />
-                                            <label className="absolute left-4 top-3 text-slate-500 text-xs tracking-widest transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-slate-500 peer-placeholder-shown:top-3.5 peer-focus:-top-2.5 peer-focus:text-cyan-400 peer-focus:bg-slate-800 peer-focus:px-2 peer-focus:text-xs">電話番号</label>
+                                        <div>
+                                            <label className="block text-sm font-sans-bold text-slate-700 mb-2">メールアドレス <span className="text-red-500 text-xs ml-1">必須</span></label>
+                                            <input 
+                                                type="email" 
+                                                name="email" 
+                                                required 
+                                                className="w-full px-4 py-3 bg-slate-50 border border-slate-300 rounded focus:border-sky-500 focus:ring-1 focus:ring-sky-500 transition-colors outline-none"
+                                                placeholder="例：info@example.com"
+                                            />
                                         </div>
                                     </div>
-                                    <div className="group relative">
-                                        <input type="email" name="email" required placeholder=" " className="peer w-full px-4 py-3 bg-slate-900/50 border border-slate-600 rounded-lg text-white focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-all outline-none placeholder-transparent" />
-                                        <label className="absolute left-4 top-3 text-slate-500 text-xs tracking-widest transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-slate-500 peer-placeholder-shown:top-3.5 peer-focus:-top-2.5 peer-focus:text-cyan-400 peer-focus:bg-slate-800 peer-focus:px-2 peer-focus:text-xs">メールアドレス</label>
+                                    
+                                    <div>
+                                        <label className="block text-sm font-sans-bold text-slate-700 mb-2">ご相談内容（現場の場所や作業内容など） <span className="text-red-500 text-xs ml-1">必須</span></label>
+                                        <textarea 
+                                            name="message" 
+                                            rows="6" 
+                                            required 
+                                            className="w-full px-4 py-3 bg-slate-50 border border-slate-300 rounded focus:border-sky-500 focus:ring-1 focus:ring-sky-500 transition-colors outline-none resize-none"
+                                            placeholder="ご依頼内容、ご希望の工期、現場の住所など、お分かりになる範囲でご記入ください。"
+                                        ></textarea>
                                     </div>
-                                    <div className="group relative">
-                                        <textarea name="message" rows="4" required placeholder=" " className="peer w-full px-4 py-3 bg-slate-900/50 border border-slate-600 rounded-lg text-white focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-all outline-none resize-none placeholder-transparent"></textarea>
-                                        <label className="absolute left-4 top-3 text-slate-500 text-xs tracking-widest transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-slate-500 peer-placeholder-shown:top-3.5 peer-focus:-top-2.5 peer-focus:text-cyan-400 peer-focus:bg-slate-800 peer-focus:px-2 peer-focus:text-xs">お問い合わせ内容</label>
-                                    </div>
-                                    <div className="pt-8 text-center">
-                                        <button type="submit" className="group relative px-12 py-4 overflow-hidden rounded-full bg-cyan-600 text-white shadow-xl transition-all hover:scale-105 hover:bg-cyan-500 hover:shadow-cyan-400/40">
-                                            <span className="relative flex items-center justify-center tracking-[0.2em] font-bold">
-                                                <IconMail className="w-4 h-4 mr-3" /> 送信する
-                                            </span>
+
+                                    <div className="pt-4 text-center">
+                                        <button 
+                                            type="submit" 
+                                            className="w-full md:w-auto px-12 py-4 bg-sky-600 hover:bg-sky-700 text-white font-sans-bold rounded shadow-md transition-colors flex items-center justify-center mx-auto"
+                                        >
+                                            <IconMail className="w-5 h-5 mr-2" /> 
+                                            入力内容を送信する
                                         </button>
+                                        <p className="text-xs text-slate-500 mt-4">送信後、担当者よりご連絡させていただきます。</p>
                                     </div>
                                 </form>
                             </div>
@@ -535,15 +449,16 @@
                     </section>
 
                     {/* Footer */}
-                    <footer className="bg-slate-950 py-12 text-white relative z-10 border-t border-white/5">
+                    <footer className="bg-slate-900 py-10 text-slate-400 relative z-10 border-t border-slate-800">
                         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center">
-                            <div className="flex items-center space-x-3 mb-4 md:mb-0">
-                                <IconAnchor className="w-5 h-5 text-cyan-500" />
-                                <span className="font-rounded font-black italic text-lg tracking-widest">SEALS DIVERS</span>
+                            <div className="flex items-center space-x-3 mb-4 md:mb-0 text-white">
+                                <IconAnchor className="w-5 h-5" />
+                                <span className="font-rounded font-black italic text-lg tracking-wider">SEALS DIVERS</span>
                             </div>
-                            <p className="text-slate-500 text-xs tracking-widest">
-                                &copy; {new Date().getFullYear()} Seals Divers Co., Ltd. All Rights Reserved.
-                            </p>
+                            <div className="text-sm text-center md:text-right">
+                                <p className="mb-1">愛知県名古屋市西区</p>
+                                <p>&copy; {new Date().getFullYear()} Seals Divers Co., Ltd. All Rights Reserved.</p>
+                            </div>
                         </div>
                     </footer>
                 </div>
@@ -554,4 +469,4 @@
         root.render(<App />);
     </script>
 </body>
-</html>\
+</html>
